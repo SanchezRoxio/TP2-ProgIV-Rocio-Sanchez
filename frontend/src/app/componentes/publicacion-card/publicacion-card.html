@@ -1,0 +1,36 @@
+<article class="panel-arcade tarjeta-publicacion" [class.tarjeta-grande]="grande">
+  <header class="cabecera-publicacion">
+    @if (urlImagen(publicacion.usuario.fotoPerfil); as foto) {
+      <img [src]="foto" alt="" class="foto-autor" />
+    } @else {
+      <div class="foto-autor-placeholder">👾</div>
+    }
+    <div>
+      <p class="nombre-autor">{{ publicacion.usuario.nombre }} {{ publicacion.usuario.apellido }}</p>
+      <p class="fecha-publicacion">{{ publicacion.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+  </header>
+
+  <h3 class="titulo-publicacion">{{ publicacion.titulo }}</h3>
+  <p class="mensaje-publicacion">{{ publicacion.mensaje }}</p>
+
+  @if (urlImagen(publicacion.imagen); as imagen) {
+    <img [src]="imagen" alt="" class="imagen-publicacion" />
+  }
+
+  <footer class="acciones-publicacion">
+    <button class="btn-arcade btn-like" [class.activo]="yaLeDiLike" [disabled]="procesando" (click)="toggleLike()">
+      {{ yaLeDiLike ? '💜' : '🤍' }} {{ publicacion.cantidadLikes }}
+    </button>
+
+    @if (!ocultarLinkVer) {
+      <a class="btn-arcade btn-ver" [routerLink]="['/publicaciones', publicacion._id]">💬 VER / COMENTAR</a>
+    }
+
+    @if (esMia) {
+      <button class="btn-arcade btn-eliminar" [disabled]="procesando" (click)="eliminar()">
+        🗑️ BORRAR
+      </button>
+    }
+  </footer>
+</article>

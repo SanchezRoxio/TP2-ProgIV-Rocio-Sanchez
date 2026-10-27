@@ -1,0 +1,77 @@
+<div class="contenedor-detalle">
+  <a routerLink="/publicaciones" class="btn-arcade btn-volver">◀ VOLVER</a>
+
+  @if (publicacion(); as publicacionActual) {
+    <div class="fila-detalle">
+      <div class="columna-publicacion">
+        <app-publicacion-card
+          [publicacion]="publicacionActual"
+          [grande]="true"
+          [ocultarLinkVer]="true"
+          (actualizada)="actualizarPublicacion($event)"
+          (eliminada)="alBorrarPublicacion()"
+        />
+      </div>
+
+      <div class="panel-arcade panel-comentarios">
+        <h2 class="titulo-comentarios">💬 COMENTARIOS</h2>
+
+      <form class="form-comentario" (ngSubmit)="comentar()">
+        <textarea
+          class="input-arcade"
+          rows="2"
+          placeholder="Escribí un comentario..."
+          [(ngModel)]="nuevoMensaje"
+          name="nuevoMensaje"
+        ></textarea>
+        <button type="submit" class="btn-arcade" [disabled]="!nuevoMensaje.trim()">COMENTAR ▶</button>
+      </form>
+
+      <div class="lista-comentarios">
+        @for (comentario of comentarios(); track comentario._id) {
+          <div class="comentario">
+            @if (urlFoto(comentario.usuario.fotoPerfil); as foto) {
+              <img [src]="foto" alt="" class="foto-autor-comentario" />
+            } @else {
+              <div class="foto-autor-comentario-placeholder">👾</div>
+            }
+
+            <div class="contenido-comentario">
+              <div class="cabecera-datos-comentario">
+                <p class="autor-comentario">
+                  {{ comentario.usuario.nombre }} {{ comentario.usuario.apellido }}
+                  @if (comentario.modificado) {
+                    <span class="etiqueta-editado">(editado)</span>
+                  }
+                </p>
+                <p class="fecha-comentario">{{ comentario.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+              </div>
+
+              @if (edicionId === comentario._id) {
+                <textarea class="input-arcade" rows="2" [(ngModel)]="mensajeEdicion" name="mensajeEdicion"></textarea>
+                <div class="acciones-edicion">
+                  <button class="btn-arcade" (click)="guardarEdicion(comentario)">GUARDAR</button>
+                  <button class="btn-arcade btn-cancelar" (click)="cancelarEdicion()">CANCELAR</button>
+                </div>
+              } @else {
+                <p class="mensaje-comentario">{{ comentario.mensaje }}</p>
+                @if (esMio(comentario)) {
+                  <button class="btn-arcade btn-editar" (click)="empezarEdicion(comentario)">✏️ EDITAR</button>
+                }
+              }
+            </div>
+          </div>
+        } @empty {
+          <p class="sin-comentarios">Todavía no hay comentarios. ¡Sé el primero!</p>
+        }
+      </div>
+
+        @if (hayMasComentarios() && comentarios().length > 0) {
+          <button class="btn-arcade btn-cargar-mas" [disabled]="cargandoMas()" (click)="cargarMasComentarios()">
+            {{ cargandoMas() ? 'CARGANDO...' : 'CARGAR MÁS COMENTARIOS ▼' }}
+          </button>
+        }
+      </div>
+    </div>
+  }
+</div>

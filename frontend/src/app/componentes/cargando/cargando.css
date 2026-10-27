@@ -1,0 +1,29 @@
+.pantalla-cargando {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.spinner-arcade {
+  width: 40px;
+  height: 40px;
+  border: 6px solid var(--color-secondary);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.texto-cargando {
+  color: var(--color-primary);
+  font-size: 12px;
+  letter-spacing: 2px;
+}

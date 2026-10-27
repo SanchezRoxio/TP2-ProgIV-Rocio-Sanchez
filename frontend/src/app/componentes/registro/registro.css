@@ -1,0 +1,70 @@
+.pantalla-centrada {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 12px;
+}
+
+.panel-registro {
+  max-width: 460px;
+  width: 100%;
+}
+
+.titulo-arcade {
+  color: var(--color-primary);
+  font-size: 16px;
+  text-align: center;
+  text-shadow: 3px 3px 0px var(--color-accent);
+  margin: 0 0 8px 0;
+}
+
+.subtitulo {
+  text-align: center;
+  color: var(--color-texto-tenue);
+  font-size: 10px;
+  margin: 0 0 25px 0;
+}
+
+.form-arcade {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fila-doble {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.fila-doble .campo {
+  flex: 1;
+  min-width: 160px;
+}
+
+.campo label {
+  display: block;
+  font-size: 9px;
+  color: var(--color-texto-tenue);
+  margin-bottom: 6px;
+}
+
+textarea.input-arcade {
+  resize: vertical;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.btn-archivo {
+  display: block;
+  text-align: center;
+  font-size: 9px;
+  word-break: break-all;
+}
+
+.link-registro {
+  text-align: center;
+  font-size: 9px;
+  margin-top: 20px;
+  line-height: 1.8;
+}

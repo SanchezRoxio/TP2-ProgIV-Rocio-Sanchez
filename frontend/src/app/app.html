@@ -1,0 +1,24 @@
+@if (authService.usuarioActual(); as usuario) {
+  <header class="barra-nav">
+    <span class="logo-nav">🕹️ BOOKFACE</span>
+    <nav class="links-nav">
+      <a class="btn-arcade" routerLink="/publicaciones" routerLinkActive="activo">PUBLICACIONES</a>
+      <a class="btn-arcade" routerLink="/mi-perfil" routerLinkActive="activo">{{ usuario.nombreUsuario }} 👤</a>
+      
+      <button class="btn-arcade" (click)="cerrarSesion()">SALIR ▶</button>
+      <button class="btn-tema" (click)="temaService.alternar()" title="Cambiar tema">
+        {{ temaService.tema() === 'oscuro' ? '☀️' : '🌙' }}
+      </button>
+    </nav>
+  </header>
+} @else {
+  <button class="btn-tema btn-tema-flotante" (click)="temaService.alternar()" title="Cambiar tema">
+    {{ temaService.tema() === 'oscuro' ? '☀️' : '🌙' }}
+  </button>
+}
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<app-modal></app-modal>

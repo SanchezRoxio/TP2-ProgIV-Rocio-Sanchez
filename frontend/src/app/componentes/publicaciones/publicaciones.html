@@ -1,0 +1,49 @@
+<div class="contenedor-publicaciones">
+  <div class="panel-arcade panel-nueva">
+    <button class="btn-arcade btn-toggle-form" (click)="mostrarFormulario.set(!mostrarFormulario())">
+      {{ mostrarFormulario() ? '✖ CERRAR' : '✏️ NUEVA PUBLICACIÓN' }}
+    </button>
+
+    @if (mostrarFormulario()) {
+      <form [formGroup]="formulario" (ngSubmit)="publicar()" class="form-arcade form-publicar">
+        <div class="campo">
+          <label>TÍTULO</label>
+          <input class="input-arcade" type="text" formControlName="titulo" />
+        </div>
+        <div class="campo">
+          <label>MENSAJE</label>
+          <textarea class="input-arcade" rows="3" formControlName="mensaje"></textarea>
+        </div>
+        <div class="campo">
+          <label>IMAGEN (opcional)</label>
+          <label class="btn-arcade btn-archivo">
+            {{ nombreArchivo || 'ELEGIR ARCHIVO' }}
+            <input type="file" accept="image/*" (change)="seleccionarArchivo($event)" hidden />
+          </label>
+        </div>
+        <button type="submit" class="btn-arcade">PUBLICAR ▶</button>
+      </form>
+    }
+  </div>
+
+  <div class="selector-orden">
+    <button class="btn-arcade" [class.activo]="orden() === 'fecha'" (click)="cambiarOrden('fecha')">🕑 MÁS RECIENTES</button>
+    <button class="btn-arcade" [class.activo]="orden() === 'likes'" (click)="cambiarOrden('likes')">💜 MÁS LIKES</button>
+  </div>
+
+  @for (publicacion of publicaciones(); track publicacion._id) {
+    <app-publicacion-card [publicacion]="publicacion" (eliminada)="quitarDeLaLista($event)" (actualizada)="actualizarEnLista($event)" />
+  } @empty {
+    @if (!cargando()) {
+      <p class="sin-publicaciones">Todavía no hay publicaciones. ¡Creá la primera!</p>
+    }
+  }
+
+  @if (publicaciones().length > 0 || pagina() > 1) {
+    <div class="paginado">
+      <button class="btn-arcade" [disabled]="pagina() === 1 || cargando()" (click)="paginaAnterior()">◀ ANTERIOR</button>
+      <span class="numero-pagina">PÁGINA {{ pagina() }}</span>
+      <button class="btn-arcade" [disabled]="!hayPaginaSiguiente() || cargando()" (click)="paginaSiguiente()">SIGUIENTE ▶</button>
+    </div>
+  }
+</div>

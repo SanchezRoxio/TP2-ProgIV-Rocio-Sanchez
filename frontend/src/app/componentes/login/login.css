@@ -1,0 +1,47 @@
+.pantalla-centrada {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 12px;
+}
+
+.panel-login {
+  max-width: 380px;
+  width: 100%;
+}
+
+.titulo-arcade {
+  color: var(--color-primary);
+  font-size: 18px;
+  text-align: center;
+  text-shadow: 3px 3px 0px var(--color-accent);
+  margin: 0 0 8px 0;
+}
+
+.subtitulo {
+  text-align: center;
+  color: var(--color-texto-tenue);
+  font-size: 10px;
+  margin: 0 0 25px 0;
+}
+
+.form-arcade {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.campo label {
+  display: block;
+  font-size: 9px;
+  color: var(--color-texto-tenue);
+  margin-bottom: 6px;
+}
+
+.link-registro {
+  text-align: center;
+  font-size: 9px;
+  margin-top: 20px;
+  line-height: 1.8;
+}

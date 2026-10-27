@@ -1,0 +1,22 @@
+@if (modalService.modalActual(); as modal) {
+  <div class="modal-overlay" (click)="modal.tipo !== 'confirmacion' ? modalService.cerrar() : null">
+    <div class="modal-caja" [class.modal-error]="modal.tipo === 'error'" [class.modal-exito]="modal.tipo === 'exito'" (click)="$event.stopPropagation()">
+      <p class="modal-icono">
+        @if (modal.tipo === 'error') { ❌ }
+        @else if (modal.tipo === 'exito') { ✅ }
+        @else if (modal.tipo === 'confirmacion') { ⏳ }
+        @else { 🕹️ }
+      </p>
+      <p class="modal-mensaje">{{ modal.mensaje }}</p>
+
+      @if (modal.tipo === 'confirmacion') {
+        <div class="modal-acciones">
+          <button class="btn-arcade" (click)="confirmar()">SÍ</button>
+          <button class="btn-arcade btn-no" (click)="cancelar()">NO</button>
+        </div>
+      } @else {
+        <button class="btn-arcade" (click)="modalService.cerrar()">OK</button>
+      }
+    </div>
+  </div>
+}

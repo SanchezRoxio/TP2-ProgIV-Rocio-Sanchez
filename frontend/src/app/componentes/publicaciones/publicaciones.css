@@ -1,0 +1,85 @@
+.contenedor-publicaciones {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 16px;
+}
+
+.panel-nueva {
+  margin-bottom: 20px;
+}
+
+.btn-toggle-form {
+  width: 100%;
+}
+
+.form-publicar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.campo label {
+  display: block;
+  font-size: 9px;
+  color: var(--color-texto-tenue);
+  margin-bottom: 6px;
+}
+
+textarea.input-arcade {
+  resize: vertical;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.btn-archivo {
+  display: block;
+  text-align: center;
+  font-size: 9px;
+  word-break: break-all;
+}
+
+.selector-orden {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.selector-orden .btn-arcade {
+  font-size: 9px;
+  padding: 8px 12px;
+  opacity: 0.6;
+}
+
+.selector-orden .btn-arcade.activo {
+  opacity: 1;
+  background-color: var(--color-primary);
+  color: #000;
+  border-color: var(--color-primary);
+}
+
+.sin-publicaciones {
+  text-align: center;
+  font-size: 11px;
+  color: var(--color-texto-tenue);
+  padding: 30px 0;
+}
+
+.paginado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.paginado .btn-arcade {
+  font-size: 9px;
+  padding: 8px 12px;
+}
+
+.numero-pagina {
+  font-size: 9px;
+  color: var(--color-texto-tenue);
+}

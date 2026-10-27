@@ -1,0 +1,149 @@
+.contenedor-detalle {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 30px 16px;
+}
+
+.btn-volver {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 9px;
+  margin-bottom: 20px;
+}
+
+.fila-detalle {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.columna-publicacion {
+  flex: 1.6 1 620px;
+}
+
+.panel-comentarios {
+  flex: 1 1 360px;
+  margin-top: 0;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.titulo-comentarios {
+  color: var(--color-primary);
+  font-size: 13px;
+  margin: 0 0 18px 0;
+}
+
+.form-comentario {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.form-comentario textarea {
+  font-family: 'Press Start 2P', monospace;
+  resize: vertical;
+}
+
+.lista-comentarios {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.comentario {
+  display: flex;
+  gap: 12px;
+  border-top: 1px dashed var(--color-secondary);
+  padding-top: 14px;
+}
+
+.foto-autor-comentario, .foto-autor-comentario-placeholder {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: 2px solid var(--color-primary);
+  flex-shrink: 0;
+}
+
+.foto-autor-comentario-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  font-size: 11px;
+}
+
+.contenido-comentario {
+  flex: 1;
+  min-width: 0;
+}
+
+.cabecera-datos-comentario {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.autor-comentario {
+  font-size: 10px;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.fecha-comentario {
+  font-size: 8px;
+  color: var(--color-texto-tenue);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.etiqueta-editado {
+  color: var(--color-texto-tenue);
+  font-size: 8px;
+}
+
+.mensaje-comentario {
+  font-size: 10px;
+  line-height: 1.7;
+  margin: 0 0 8px 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.btn-editar {
+  font-size: 8px;
+  padding: 6px 10px;
+}
+
+.acciones-edicion {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.acciones-edicion .btn-arcade {
+  font-size: 8px;
+  padding: 6px 10px;
+}
+
+.btn-cancelar {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.sin-comentarios {
+  font-size: 10px;
+  color: var(--color-texto-tenue);
+}
+
+.btn-cargar-mas {
+  display: block;
+  margin: 20px auto 0 auto;
+  font-size: 9px;
+}

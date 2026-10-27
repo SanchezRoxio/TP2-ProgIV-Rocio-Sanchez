@@ -1,0 +1,53 @@
+@if (authService.usuarioActual(); as usuario) {
+  <div class="contenedor-perfil">
+    <div class="panel-arcade panel-perfil">
+      <div class="cabecera-perfil">
+        @if (urlFotoPerfil(usuario.fotoPerfil); as foto) {
+          <img [src]="foto" alt="Foto de perfil" class="foto-perfil" />
+        } @else {
+          <div class="foto-placeholder">👾</div>
+        }
+        <div>
+          <h1 class="nombre-usuario">{{ usuario.nombre }} {{ usuario.apellido }}</h1>
+          <p class="arroba-usuario">&#64;{{ usuario.nombreUsuario }}</p>
+        </div>
+      </div>
+
+      <div class="dato-perfil">
+        <span class="etiqueta">CORREO</span>
+        <span>{{ usuario.correo }}</span>
+      </div>
+      <div class="dato-perfil">
+        <span class="etiqueta">NACIMIENTO</span>
+        <span>{{ usuario.fechaNacimiento | date:'dd/MM/yyyy' }}</span>
+      </div>
+      <div class="dato-perfil">
+        <span class="etiqueta">PERFIL</span>
+        <span>{{ usuario.perfil === 'administrador' ? '👑 ADMINISTRADOR' : '🎮 USUARIO' }}</span>
+      </div>
+      @if (usuario.descripcion) {
+        <div class="dato-perfil descripcion">
+          <span class="etiqueta">BIO</span>
+          <span>{{ usuario.descripcion }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="panel-arcade panel-publicaciones-perfil">
+      <h2 class="titulo-mini">MIS ÚLTIMAS PUBLICACIONES</h2>
+      @for (publicacion of misPublicaciones(); track publicacion._id) {
+        <app-publicacion-card [publicacion]="publicacion" (eliminada)="quitarDeLaLista($event)" (actualizada)="actualizarEnLista($event)" />
+      } @empty {
+        <p class="texto-proximamente">Todavía no publicaste nada.</p>
+      }
+
+      @if (misPublicaciones().length > 0 || pagina() > 1) {
+        <div class="paginado">
+          <button class="btn-arcade" [disabled]="pagina() === 1" (click)="paginaAnterior()">◀ ANTERIOR</button>
+          <span class="numero-pagina">PÁGINA {{ pagina() }}</span>
+          <button class="btn-arcade" [disabled]="!hayPaginaSiguiente()" (click)="paginaSiguiente()">SIGUIENTE ▶</button>
+        </div>
+      }
+    </div>
+  </div>
+}

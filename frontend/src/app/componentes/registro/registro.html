@@ -1,0 +1,91 @@
+<div class="pantalla-centrada">
+  <div class="panel-arcade panel-registro">
+    <h1 class="titulo-arcade">🎮 NUEVO JUGADOR</h1>
+    <p class="subtitulo">crear cuenta</p>
+
+    <form [formGroup]="formulario" (ngSubmit)="enviar()" class="form-arcade" enctype="multipart/form-data">
+      <div class="fila-doble">
+        <div class="campo">
+          <label>NOMBRE</label>
+          <input class="input-arcade" type="text" formControlName="nombre" />
+          @if (formulario.controls.nombre.invalid && formulario.controls.nombre.touched) {
+            <p class="error-campo">Obligatorio.</p>
+          }
+        </div>
+        <div class="campo">
+          <label>APELLIDO</label>
+          <input class="input-arcade" type="text" formControlName="apellido" />
+          @if (formulario.controls.apellido.invalid && formulario.controls.apellido.touched) {
+            <p class="error-campo">Obligatorio.</p>
+          }
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>CORREO</label>
+        <input class="input-arcade" type="email" formControlName="correo" />
+        @if (formulario.controls.correo.invalid && formulario.controls.correo.touched) {
+          <p class="error-campo">Ingresá un correo válido.</p>
+        }
+      </div>
+
+      <div class="campo">
+        <label>NOMBRE DE USUARIO</label>
+        <input class="input-arcade" type="text" formControlName="nombreUsuario" />
+        @if (formulario.controls.nombreUsuario.invalid && formulario.controls.nombreUsuario.touched) {
+          <p class="error-campo">Mínimo 3 caracteres.</p>
+        }
+      </div>
+
+      <div class="fila-doble">
+        <div class="campo">
+          <label>CONTRASEÑA</label>
+          <input class="input-arcade" type="password" formControlName="password" />
+          @if (formulario.controls.password.invalid && formulario.controls.password.touched) {
+            <p class="error-campo">8+ caracteres, 1 mayúscula y 1 número.</p>
+          }
+        </div>
+        <div class="campo">
+          <label>REPETIR CONTRASEÑA</label>
+          <input class="input-arcade" type="password" formControlName="repetirPassword" />
+          @if (formulario.controls.repetirPassword.touched) {
+            @if (!formulario.controls.repetirPassword.value) {
+              <p class="error-campo">Repetí la contraseña.</p>
+            } @else if (formulario.errors?.['passwordsDistintas']) {
+              <p class="error-campo">Las contraseñas no coinciden.</p>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>FECHA DE NACIMIENTO</label>
+        <input class="input-arcade" type="date" formControlName="fechaNacimiento" />
+        @if (formulario.controls.fechaNacimiento.invalid && formulario.controls.fechaNacimiento.touched) {
+          <p class="error-campo">Obligatorio.</p>
+        }
+      </div>
+
+      <div class="campo">
+        <label>DESCRIPCIÓN BREVE</label>
+        <textarea class="input-arcade" rows="3" formControlName="descripcion"></textarea>
+      </div>
+
+      <div class="campo">
+        <label>FOTO DE PERFIL (opcional)</label>
+        <label class="btn-arcade btn-archivo">
+          {{ nombreArchivo || 'ELEGIR ARCHIVO' }}
+          <input type="file" accept="image/*" (change)="seleccionarArchivo($event)" hidden />
+        </label>
+      </div>
+
+      <button type="submit" class="btn-arcade" [disabled]="cargando">
+        {{ cargando ? 'CREANDO...' : 'CREAR CUENTA ▶' }}
+      </button>
+    </form>
+
+    <p class="link-registro">
+      ¿Ya tenés cuenta? <a routerLink="/login">Iniciá sesión</a>
+    </p>
+  </div>
+</div>

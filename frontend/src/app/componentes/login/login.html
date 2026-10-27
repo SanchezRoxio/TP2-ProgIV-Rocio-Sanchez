@@ -1,0 +1,32 @@
+<div class="pantalla-centrada">
+  <div class="panel-arcade panel-login">
+    <h1 class="titulo-arcade">🕹️ INSERT COIN</h1>
+    <p class="subtitulo">Iniciar sesión</p>
+
+    <form [formGroup]="formulario" (ngSubmit)="enviar()" class="form-arcade">
+      <div class="campo">
+        <label>CORREO O USUARIO</label>
+        <input class="input-arcade" type="text" formControlName="identificador" />
+        @if (formulario.controls.identificador.invalid && formulario.controls.identificador.touched) {
+          <p class="error-campo">Este campo es obligatorio.</p>
+        }
+      </div>
+
+      <div class="campo">
+        <label>CONTRASEÑA</label>
+        <input class="input-arcade" type="password" formControlName="password" />
+        @if (formulario.controls.password.invalid && formulario.controls.password.touched) {
+          <p class="error-campo">Este campo es obligatorio.</p>
+        }
+      </div>
+
+      <button type="submit" class="btn-arcade" [disabled]="cargando">
+        {{ cargando ? 'CARGANDO...' : 'INGRESAR ▶' }}
+      </button>
+    </form>
+
+    <p class="link-registro">
+      ¿No tenés cuenta? <a routerLink="/registro">Registrate acá</a>
+    </p>
+  </div>
+</div>

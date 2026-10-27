@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* modo oscuro (default): tonos tierra oscuros */
+:root,
+:root[data-tema='oscuro'] {
+  --color-bg: #130000;
+  --color-bg-panel: #210f0c;
+  --color-input-bg: #2f1f17;
+  --color-primary: #e3c3b1;
+  --color-secondary: #3d2e23;
+  --color-accent: #caac9a;
+  --color-texto: #e3c3b1;
+  --color-texto-tenue: #b29483;
+  --color-error: #ff3860;
+  --color-exito: #2ee6a8;
+}
+
+/* modo claro: tonos tierra claros */
+:root[data-tema='claro'] {
+  --color-bg: #e3c3b1;
+  --color-bg-panel: #caac9a;
+  --color-input-bg: #b29483;
+  --color-primary: #130000;
+  --color-secondary: #997d6c;
+  --color-accent: #806555;
+  --color-texto: #130000;
+  --color-texto-tenue: #806555;
+  --color-error: #c7003f;
+  --color-exito: #0b7a52;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-texto);
+  font-family: 'Press Start 2P', monospace;
+}
+
+body {
+  background-image:
+    linear-gradient(var(--color-bg-panel) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-bg-panel) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+.btn-arcade {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--color-secondary);
+  border: 3px solid var(--color-primary);
+  color: var(--color-texto);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  line-height: 1;
+  padding: 12px 18px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px #000;
+  transition: transform 0.1s ease;
+}
+
+.btn-arcade:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000;
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.btn-arcade:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.panel-arcade {
+  background-color: var(--color-bg-panel);
+  border: 4px solid var(--color-secondary);
+  box-shadow: 8px 8px 0px #000;
+  padding: 25px;
+}
+
+.input-arcade {
+  background-color: var(--color-input-bg);
+  border: 3px solid var(--color-secondary);
+  color: var(--color-primary);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  padding: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.input-arcade:focus {
+  border-color: var(--color-primary);
+}
+
+.error-campo {
+  color: var(--color-error);
+  font-size: 9px;
+  margin-top: 4px;
+}
+
+.btn-tema {
+  background-color: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  padding: 8px 10px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn-tema:hover {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
