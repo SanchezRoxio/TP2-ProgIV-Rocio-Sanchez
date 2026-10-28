@@ -40,7 +40,8 @@ export class PublicacionCard {
   }
 
   urlImagen(ruta?: string): string | null {
-    return ruta ? `${API_URL}${ruta}` : null;
+    if (!ruta) return null;
+    return ruta.startsWith('http') ? ruta : `${API_URL}${ruta}`;
   }
 
   async toggleLike() {

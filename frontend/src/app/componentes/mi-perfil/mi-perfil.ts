@@ -54,7 +54,7 @@ export class MiPerfil {
 
   urlFotoPerfil(ruta?: string): string | null {
     if (!ruta) return null;
-    return `${API_URL}${ruta}`;
+    return ruta.startsWith('http') ? ruta : `${API_URL}${ruta}`;
   }
 
   quitarDeLaLista(id: string) {
