@@ -1,11 +1,12 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
+import { memoryStorage } from 'multer';
 import { extname } from 'path';
 import type { Request, Response } from 'express';
 import { AuthService } from './auth.service.js';
 import { RegistroDto } from './dto/registro.dto.js';
 import { LoginDto } from './dto/login.dto.js';
+import { CloudinaryService } from '../cloudinary/cloudinary.service.js';
 
 const QUINCE_MINUTOS_MS = 15 * 60 * 1000;
 
@@ -20,19 +21,16 @@ function setearCookieToken(res: Response, token: string) {
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private cloudinaryService: CloudinaryService,
+  ) {}
 
   @Post('registro')
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(
     FileInterceptor('fotoPerfil', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (_req, file, callback) => {
-          const nombreUnico = `${Date.now()}-${Math.round(Math.random() * 1e9)}${extname(file.originalname)}`;
-          callback(null, nombreUnico);
-        },
-      }),
+      storage: memoryStorage(),
       fileFilter: (_req, file, callback) => {
         const esImagen = /\.(jpg|jpeg|png|gif|webp)$/i.test(extname(file.originalname));
         callback(esImagen ? null : new Error('La foto de perfil debe ser una imagen.'), esImagen);
@@ -44,7 +42,7 @@ export class AuthController {
     @UploadedFile() foto: Express.Multer.File | undefined,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const fotoPerfil = foto ? `/uploads/${foto.filename}` : undefined;
+    const fotoPerfil = foto ? await this.cloudinaryService.subirImagen(foto.buffer) : undefined;
     const { usuario, token } = await this.authService.registrar(registroDto, fotoPerfil);
     setearCookieToken(res, token);
     return usuario;

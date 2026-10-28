@@ -8,6 +8,7 @@ import { Publicacion, PublicacionSchema } from './entities/publicacion.entity.js
 import { Comentario, ComentarioSchema } from './entities/comentario.entity.js';
 import { UsuariosModule } from '../usuarios/usuarios.module.js';
 import { AuthModule } from '../auth/auth.module.js';
+import { CloudinaryModule } from '../cloudinary/cloudinary.module.js';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AuthModule } from '../auth/auth.module.js';
     ]),
     UsuariosModule,
     AuthModule,
+    CloudinaryModule,
   ],
   controllers: [PublicacionesController, ComentariosController],
   providers: [PublicacionesService, ComentariosService],
