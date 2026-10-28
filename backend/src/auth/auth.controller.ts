@@ -10,13 +10,23 @@ import { CloudinaryService } from '../cloudinary/cloudinary.service.js';
 
 const QUINCE_MINUTOS_MS = 15 * 60 * 1000;
 
-function setearCookieToken(res: Response, token: string) {
-  res.cookie('token', token, {
+// en Vercel, front y back viven en dominios distintos (cross-site): el
+// navegador solo manda la cookie ahi si es sameSite:'none' + secure:true.
+// en local (localhost:4200 -> localhost:3000) son el mismo "site" (mismo
+// hostname, distinto puerto), asi que sameSite:'lax' + secure:false alcanza
+// (y hace falta, porque secure:true exige https, que no tenemos en local)
+const esProduccion = !!process.env.VERCEL;
+
+function opcionesCookie() {
+  return {
     httpOnly: true,
-    sameSite: 'lax',
-    secure: false, // en produccion (https) esto va en true
-    maxAge: QUINCE_MINUTOS_MS,
-  });
+    sameSite: esProduccion ? ('none' as const) : ('lax' as const),
+    secure: esProduccion,
+  };
+}
+
+function setearCookieToken(res: Response, token: string) {
+  res.cookie('token', token, { ...opcionesCookie(), maxAge: QUINCE_MINUTOS_MS });
 }
 
 @Controller('auth')
@@ -73,7 +83,7 @@ export class AuthController {
   @Post('logout')
   @HttpCode(HttpStatus.OK)
   logout(@Res({ passthrough: true }) res: Response) {
-    res.clearCookie('token');
+    res.clearCookie('token', opcionesCookie());
     return { mensaje: 'Sesión cerrada.' };
   }
 }
