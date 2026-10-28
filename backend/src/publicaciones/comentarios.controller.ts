@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Header, HttpCode, HttpStatus, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
-import { ComentariosService } from './comentarios.service';
-import { CrearComentarioDto } from './dto/crear-comentario.dto';
-import { ListarComentariosDto } from './dto/listar-comentarios.dto';
-import { AuthGuard } from '../auth/guards/auth.guard';
-import { UsuarioActual } from '../auth/decorators/usuario-actual.decorator';
-import type { PayloadToken } from '../auth/tipos/payload-token';
+import { ComentariosService } from './comentarios.service.js';
+import { CrearComentarioDto } from './dto/crear-comentario.dto.js';
+import { ListarComentariosDto } from './dto/listar-comentarios.dto.js';
+import { AuthGuard } from '../auth/guards/auth.guard.js';
+import { UsuarioActual } from '../auth/decorators/usuario-actual.decorator.js';
+import type { PayloadToken } from '../auth/tipos/payload-token.js';
 
 @Controller()
 export class ComentariosController {

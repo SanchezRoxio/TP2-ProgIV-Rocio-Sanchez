@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Comentario, ComentarioDocument } from './entities/comentario.entity';
+import { Comentario, ComentarioDocument } from './entities/comentario.entity.js';
 
 const CAMPOS_AUTOR = 'nombre apellido nombreUsuario fotoPerfil';
 

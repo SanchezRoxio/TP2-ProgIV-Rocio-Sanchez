@@ -3,9 +3,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import type { Request, Response } from 'express';
-import { AuthService } from './auth.service';
-import { RegistroDto } from './dto/registro.dto';
-import { LoginDto } from './dto/login.dto';
+import { AuthService } from './auth.service.js';
+import { RegistroDto } from './dto/registro.dto.js';
+import { LoginDto } from './dto/login.dto.js';
 
 const QUINCE_MINUTOS_MS = 15 * 60 * 1000;
 

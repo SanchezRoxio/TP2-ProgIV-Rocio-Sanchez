@@ -1,9 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { join } from 'path';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
-import { AppModule } from './app.module';
+import { AppModule } from './app.module.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);

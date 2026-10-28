@@ -2,12 +2,12 @@ import { Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, Param, Pos
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { PublicacionesService } from './publicaciones.service';
-import { CrearPublicacionDto } from './dto/crear-publicacion.dto';
-import { ListarPublicacionesDto } from './dto/listar-publicaciones.dto';
-import { AuthGuard } from '../auth/guards/auth.guard';
-import { UsuarioActual } from '../auth/decorators/usuario-actual.decorator';
-import type { PayloadToken } from '../auth/tipos/payload-token';
+import { PublicacionesService } from './publicaciones.service.js';
+import { CrearPublicacionDto } from './dto/crear-publicacion.dto.js';
+import { ListarPublicacionesDto } from './dto/listar-publicaciones.dto.js';
+import { AuthGuard } from '../auth/guards/auth.guard.js';
+import { UsuarioActual } from '../auth/decorators/usuario-actual.decorator.js';
+import type { PayloadToken } from '../auth/tipos/payload-token.js';
 
 const configuracionImagen = {
   storage: diskStorage({

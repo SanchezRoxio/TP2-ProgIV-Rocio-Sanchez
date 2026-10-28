@@ -1,9 +1,9 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { Publicacion, PublicacionDocument } from './entities/publicacion.entity';
-import { UsuariosService } from '../usuarios/usuarios.service';
-import { CrearPublicacionDto } from './dto/crear-publicacion.dto';
+import { Publicacion, PublicacionDocument } from './entities/publicacion.entity.js';
+import { UsuariosService } from '../usuarios/usuarios.service.js';
+import { CrearPublicacionDto } from './dto/crear-publicacion.dto.js';
 
 export interface OpcionesListado {
   orden?: 'fecha' | 'likes';
