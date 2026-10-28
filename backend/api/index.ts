@@ -3,7 +3,7 @@ import { ExpressAdapter, NestExpressApplication } from '@nestjs/platform-express
 import { ValidationPipe } from '@nestjs/common';
 import cookieParser from 'cookie-parser';
 import express from 'express';
-import { AppModule } from '../src/app.module';
+import { AppModule } from '../src/app.module.js';
 
 // Vercel invoca esta funcion por cada request (no queda un server prendido
 // como con app.listen() en local). Arrancar Nest completo en cada invocacion
