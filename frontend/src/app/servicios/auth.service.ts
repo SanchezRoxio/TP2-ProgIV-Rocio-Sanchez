@@ -58,6 +58,14 @@ export class AuthService {
     }
   }
 
+  // se usa cuando el server ya nos dijo 401 (token vencido/invalido):
+  // la sesion ya esta muerta del lado del server, aca solo hace falta
+  // limpiar el estado local para que el header deje de mostrarte como logueada
+  limpiarSesionLocal() {
+    this.detenerContadorSesion();
+    this.usuarioActual.set(null);
+  }
+
   haySesion(): boolean {
     return !!this.usuarioActual();
   }
@@ -75,8 +83,14 @@ export class AuthService {
       this.modalService.confirmar(
         '⏳ Quedan 5 minutos de sesión. ¿Querés extenderla?',
         async () => {
-          await this.refrescarToken();
-          this.iniciarContadorSesion();
+          try {
+            await this.refrescarToken();
+            this.iniciarContadorSesion();
+          } catch {
+            // si esto falla es porque la cookie ya vencio de verdad
+            // (ej. la pestaña estuvo en segundo plano y el aviso salio tarde)
+            this.modalService.error('No se pudo extender la sesión, iniciá sesión de nuevo.');
+          }
         }
       );
     }, DIEZ_MINUTOS_MS);
