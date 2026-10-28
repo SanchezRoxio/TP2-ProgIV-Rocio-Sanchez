@@ -1,5 +1,5 @@
 {
-  "version": 2,
-  "builds": [{ "src": "api/index.mts", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "api/index.mts" }]
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/index" }
+  ]
 }
