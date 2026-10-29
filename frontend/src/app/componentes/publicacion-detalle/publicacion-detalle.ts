@@ -9,6 +9,7 @@ import { ModalService } from '../../servicios/modal.service';
 import { Publicacion } from '../../modelos/publicacion';
 import { Comentario } from '../../modelos/comentario';
 import { PublicacionCard } from '../publicacion-card/publicacion-card';
+import { TiempoRelativoPipe } from '../../pipes/tiempo-relativo.pipe';
 import { API_URL } from '../../config';
 
 const COMENTARIOS_POR_TANDA = 5;
@@ -16,7 +17,7 @@ const COMENTARIOS_POR_TANDA = 5;
 @Component({
   selector: 'app-publicacion-detalle',
   standalone: true,
-  imports: [FormsModule, RouterLink, PublicacionCard, DatePipe],
+  imports: [FormsModule, RouterLink, PublicacionCard, DatePipe, TiempoRelativoPipe],
   templateUrl: './publicacion-detalle.html',
   styleUrl: './publicacion-detalle.css'
 })

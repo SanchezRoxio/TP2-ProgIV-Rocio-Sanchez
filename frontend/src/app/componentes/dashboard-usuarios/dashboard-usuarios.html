@@ -1,0 +1,116 @@
+<div class="contenedor-dashboard">
+  <h1 class="titulo-arcade">👑 USUARIOS</h1>
+
+  <button class="btn-arcade" (click)="mostrarFormulario.set(!mostrarFormulario())">
+    {{ mostrarFormulario() ? 'CANCELAR' : '+ NUEVO USUARIO' }}
+  </button>
+
+  @if (mostrarFormulario()) {
+    <form class="panel-arcade form-arcade form-nuevo-usuario" [formGroup]="formulario" (ngSubmit)="crearUsuario()">
+      <div class="campo">
+        <label>NOMBRE</label>
+        <input class="input-arcade" type="text" formControlName="nombre" appEnfocar />
+      </div>
+
+      <div class="campo">
+        <label>APELLIDO</label>
+        <input class="input-arcade" type="text" formControlName="apellido" />
+      </div>
+
+      <div class="campo">
+        <label>CORREO</label>
+        <input class="input-arcade" type="email" formControlName="correo" />
+      </div>
+
+      <div class="campo">
+        <label>NOMBRE DE USUARIO</label>
+        <input class="input-arcade" type="text" formControlName="nombreUsuario" />
+      </div>
+
+      <div class="campo">
+        <label>CONTRASEÑA</label>
+        <input class="input-arcade" type="password" formControlName="password" />
+        <p class="ayuda-campo">Mínimo 8 caracteres, una mayúscula y un número.</p>
+      </div>
+
+      <div class="campo">
+        <label>FECHA DE NACIMIENTO</label>
+        <input class="input-arcade" type="date" formControlName="fechaNacimiento" />
+      </div>
+
+      <div class="campo">
+        <label>DESCRIPCIÓN BREVE</label>
+        <textarea class="input-arcade" rows="2" formControlName="descripcion"></textarea>
+      </div>
+
+      <div class="campo">
+        <label>PERFIL</label>
+        <div class="opciones-perfil">
+          <label class="opcion-radio">
+            <input type="radio" formControlName="perfil" value="usuario" />
+            USUARIO
+          </label>
+          <label class="opcion-radio">
+            <input type="radio" formControlName="perfil" value="administrador" />
+            ADMINISTRADOR
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-arcade" [disabled]="enviando">
+        {{ enviando ? 'CREANDO...' : 'CREAR USUARIO ▶' }}
+      </button>
+    </form>
+  }
+
+  @if (cargando()) {
+    <p class="cargando-texto">Cargando usuarios...</p>
+  } @else {
+    <table class="panel-arcade tabla-usuarios">
+      <thead>
+        <tr>
+          <th></th>
+          <th>NOMBRE</th>
+          <th>CORREO / USUARIO</th>
+          <th>PERFIL</th>
+          <th>ESTADO</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (usuario of usuarios(); track usuario._id) {
+          <tr appResaltarFila>
+            <td>
+              @if (usuario.fotoPerfil) {
+                <img [src]="usuario.fotoPerfil" alt="" class="avatar-chico" />
+              } @else {
+                <div class="avatar-chico avatar-iniciales">{{ usuario.nombre | iniciales:usuario.apellido }}</div>
+              }
+            </td>
+            <td>{{ usuario.nombre }} {{ usuario.apellido }}</td>
+            <td>
+              {{ usuario.correo }}<br />
+              <span class="texto-tenue">&#64;{{ usuario.nombreUsuario }}</span>
+            </td>
+            <td>{{ usuario.perfil === 'administrador' ? '👑 ADMIN' : 'USUARIO' }}</td>
+            <td>
+              <span [class.estado-activo]="usuario.activo" [class.estado-inactivo]="!usuario.activo">
+                {{ usuario.activo ? 'ACTIVO' : 'DESHABILITADO' }}
+              </span>
+            </td>
+            <td>
+              <button
+                class="btn-arcade btn-chico"
+                [class.btn-eliminar]="usuario.activo"
+                [appConfirmarAccion]="usuario.activo ? '¿Deshabilitar a ' + usuario.nombreUsuario + '?' : '¿Habilitar a ' + usuario.nombreUsuario + '?'"
+                (confirmado)="alternarActivo(usuario)"
+              >
+                {{ usuario.activo ? 'DESHABILITAR' : 'HABILITAR' }}
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

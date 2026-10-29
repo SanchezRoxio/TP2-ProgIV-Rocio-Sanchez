@@ -8,4 +8,5 @@ export interface Usuario {
   descripcion?: string;
   fotoPerfil?: string;
   perfil: 'usuario' | 'administrador';
+  activo: boolean;
 }

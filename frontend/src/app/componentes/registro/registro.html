@@ -1,13 +1,12 @@
 <div class="pantalla-centrada">
   <div class="panel-arcade panel-registro">
-    <h1 class="titulo-arcade">🎮 NUEVO JUGADOR</h1>
-    <p class="subtitulo">crear cuenta</p>
+    <h1 class="titulo-arcade">🎮 CREAR CUENTA</h1>
 
     <form [formGroup]="formulario" (ngSubmit)="enviar()" class="form-arcade" enctype="multipart/form-data">
       <div class="fila-doble">
         <div class="campo">
           <label>NOMBRE</label>
-          <input class="input-arcade" type="text" formControlName="nombre" />
+          <input class="input-arcade" type="text" formControlName="nombre" appEnfocar />
           @if (formulario.controls.nombre.invalid && formulario.controls.nombre.touched) {
             <p class="error-campo">Obligatorio.</p>
           }

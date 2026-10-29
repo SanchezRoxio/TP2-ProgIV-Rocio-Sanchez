@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, Validati
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../servicios/auth.service';
 import { ModalService } from '../../servicios/modal.service';
+import { EnfocarDirective } from '../../directivas/enfocar.directive';
 
 // al menos 8 caracteres, 1 mayuscula y 1 numero (mismo criterio que valida el backend)
 const PATRON_PASSWORD = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -16,7 +17,7 @@ function passwordsIgualesValidator(grupo: AbstractControl): ValidationErrors | n
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, EnfocarDirective],
   templateUrl: './registro.html',
   styleUrl: './registro.css'
 })
@@ -79,7 +80,7 @@ export class Registro {
 
     try {
       await this.authService.registrar(formData);
-      this.modalService.exito('¡Cuenta creada! Ya podés jugar.');
+      this.modalService.exito('¡Cuenta creada con éxito!');
       this.router.navigate(['/publicaciones']);
     } catch (error: any) {
       const mensaje = error?.error?.message ?? 'No se pudo completar el registro.';

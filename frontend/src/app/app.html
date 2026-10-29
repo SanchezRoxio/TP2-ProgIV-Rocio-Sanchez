@@ -3,8 +3,12 @@
     <span class="logo-nav">🕹️ BOOKFACE</span>
     <nav class="links-nav">
       <a class="btn-arcade" routerLink="/publicaciones" routerLinkActive="activo">PUBLICACIONES</a>
+      @if (usuario.perfil === 'administrador') {
+        <a class="btn-arcade" routerLink="/dashboard/usuarios" routerLinkActive="activo">USUARIOS 👑</a>
+        <a class="btn-arcade" routerLink="/dashboard/estadisticas" routerLinkActive="activo">ESTADÍSTICAS 📊</a>
+      }
       <a class="btn-arcade" routerLink="/mi-perfil" routerLinkActive="activo">{{ usuario.nombreUsuario }} 👤</a>
-      
+
       <button class="btn-arcade" (click)="cerrarSesion()">SALIR ▶</button>
       <button class="btn-tema" (click)="temaService.alternar()" title="Cambiar tema">
         {{ temaService.tema() === 'oscuro' ? '☀️' : '🌙' }}

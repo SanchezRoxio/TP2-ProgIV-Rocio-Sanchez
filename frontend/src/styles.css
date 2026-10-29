@@ -13,6 +13,7 @@
   --color-texto-tenue: #b29483;
   --color-error: #ff3860;
   --color-exito: #2ee6a8;
+  --color-titulo: #caac9a;
 }
 
 /* modo claro: tonos tierra claros */
@@ -27,6 +28,7 @@
   --color-texto-tenue: #806555;
   --color-error: #c7003f;
   --color-exito: #0b7a52;
+  --color-titulo: #51392a;
 }
 
 * {

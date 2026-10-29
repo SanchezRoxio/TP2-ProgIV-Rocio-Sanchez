@@ -1,0 +1,16 @@
+{
+  "name": "BookFace",
+  "short_name": "BookFace",
+  "description": "Red social para el TP de Programación IV",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#130000",
+  "theme_color": "#130000",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

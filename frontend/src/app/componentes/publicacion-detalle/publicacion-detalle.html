@@ -44,7 +44,9 @@
                     <span class="etiqueta-editado">(editado)</span>
                   }
                 </p>
-                <p class="fecha-comentario">{{ comentario.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+                <p class="fecha-comentario" [title]="comentario.createdAt | date:'dd/MM/yyyy HH:mm'">
+                  {{ comentario.createdAt | tiempoRelativo }}
+                </p>
               </div>
 
               @if (edicionId === comentario._id) {

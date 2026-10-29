@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { CanMatchFn, Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
 
-export const authGuard: CanMatchFn = async () => {
+export const authGuard: CanMatchFn = (_route, segments) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
@@ -10,13 +10,10 @@ export const authGuard: CanMatchFn = async () => {
     return true;
   }
 
-  // si no tenemos el usuario en memoria puede ser porque recien se refresco
-  // la pagina en una ruta que no es la raiz (Cargando nunca corrio) — antes
-  // de mandar al login de una, probamos si la cookie todavia es valida
-  const sigueValida = await authService.autorizar();
-  if (sigueValida) {
-    return true;
-  }
-
-  return router.createUrlTree(['/login']);
+  // si no tenemos el usuario en memoria es porque recien se refresco la
+  // pagina en una ruta que no es la raiz (Cargando nunca corrio). En vez de
+  // validar en silencio, mandamos a Cargando (con su spinner) y le avisamos
+  // a donde volver una vez que confirme si la sesion sigue siendo valida
+  const destino = '/' + segments.map(s => s.path).join('/');
+  return router.createUrlTree(['/'], { queryParams: { destino } });
 };

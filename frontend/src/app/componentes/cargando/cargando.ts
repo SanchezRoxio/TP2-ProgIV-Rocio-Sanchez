@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../servicios/auth.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { AuthService } from '../../servicios/auth.service';
 export class Cargando {
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   constructor() {
     this.validarSesion();
@@ -18,6 +19,13 @@ export class Cargando {
 
   private async validarSesion() {
     const haySesionValida = await this.authService.autorizar();
-    this.router.navigate([haySesionValida ? '/publicaciones' : '/login']);
+    if (!haySesionValida) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    // si el authGuard nos mando para aca (refresco de pagina en una ruta
+    // protegida), volvemos a esa misma ruta en vez de ir siempre al feed
+    const destino = this.route.snapshot.queryParamMap.get('destino');
+    this.router.navigateByUrl(destino ?? '/publicaciones');
   }
 }

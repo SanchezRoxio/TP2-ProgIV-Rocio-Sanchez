@@ -6,11 +6,12 @@ import { AuthService } from '../../servicios/auth.service';
 import { PublicacionesService } from '../../servicios/publicaciones.service';
 import { ModalService } from '../../servicios/modal.service';
 import { API_URL } from '../../config';
+import { TruncarPipe } from '../../pipes/truncar.pipe';
 
 @Component({
   selector: 'app-publicacion-card',
   standalone: true,
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe, RouterLink, TruncarPipe],
   templateUrl: './publicacion-card.html',
   styleUrl: './publicacion-card.css'
 })
@@ -33,6 +34,10 @@ export class PublicacionCard {
 
   get esMia(): boolean {
     return this.publicacion.usuario._id === this.usuarioId;
+  }
+
+  get esAdmin(): boolean {
+    return this.authService.usuarioActual()?.perfil === 'administrador';
   }
 
   get yaLeDiLike(): boolean {

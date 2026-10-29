@@ -64,6 +64,10 @@ export class AuthService {
       throw new UnauthorizedException('Usuario o contraseña incorrectos.');
     }
 
+    if (!usuario.activo) {
+      throw new UnauthorizedException('Tu cuenta fue deshabilitada. Contactá a un administrador.');
+    }
+
     return { usuario: this.sinPassword(usuario), token: this.generarToken(usuario) };
   }
 

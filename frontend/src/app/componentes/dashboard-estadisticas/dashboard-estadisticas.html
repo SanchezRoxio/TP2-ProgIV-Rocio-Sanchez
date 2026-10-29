@@ -1,0 +1,72 @@
+<div class="contenedor-dashboard">
+  <h1 class="titulo-arcade">📊 ESTADÍSTICAS</h1>
+
+  <div class="panel-arcade selector-rango">
+    <div class="campo">
+      <label>DESDE</label>
+      <input class="input-arcade" type="date" [(ngModel)]="desde" />
+    </div>
+    <div class="campo">
+      <label>HASTA</label>
+      <input class="input-arcade" type="date" [(ngModel)]="hasta" />
+    </div>
+    <button class="btn-arcade" [disabled]="cargando()" (click)="aplicar()">
+      {{ cargando() ? 'CARGANDO...' : 'APLICAR ▶' }}
+    </button>
+  </div>
+
+  <div class="grilla-graficos">
+    <section class="panel-arcade grafico">
+      <h2 class="titulo-grafico">📊 PUBLICACIONES POR USUARIO</h2>
+      @if (publicacionesPorUsuario().length === 0) {
+        <p class="sin-datos">Sin datos en este rango.</p>
+      } @else {
+        <div class="grafico-barras">
+          @for (fila of publicacionesPorUsuario(); track fila.nombre) {
+            <div class="fila-barra">
+              <span class="etiqueta-barra">{{ fila.nombre }}</span>
+              <div class="pista-barra">
+                <div class="barra" [style.width.%]="(fila.cantidad / maximoBarras()) * 100"></div>
+              </div>
+              <span class="valor-barra">{{ fila.cantidad }}</span>
+            </div>
+          }
+        </div>
+      }
+    </section>
+
+    <section class="panel-arcade grafico">
+      <h2 class="titulo-grafico">📈 COMENTARIOS POR DÍA</h2>
+      @if (comentariosPorDia().length === 0) {
+        <p class="sin-datos">Sin datos en este rango.</p>
+      } @else {
+        <svg class="grafico-lineas" [attr.viewBox]="'0 0 ' + anchoSvg + ' ' + altoSvg" preserveAspectRatio="none">
+          <polyline [attr.points]="puntosLinea()" fill="none" stroke="var(--color-primary)" stroke-width="2" />
+        </svg>
+        <p class="pie-grafico-lineas">
+          <span>{{ comentariosPorDia()[0].fecha }}</span>
+          <span>{{ comentariosPorDia()[comentariosPorDia().length - 1].fecha }}</span>
+        </p>
+      }
+    </section>
+
+    <section class="panel-arcade grafico">
+      <h2 class="titulo-grafico">🥧 COMENTARIOS POR PUBLICACIÓN</h2>
+      @if (porcionesTorta().length === 0) {
+        <p class="sin-datos">Sin datos en este rango.</p>
+      } @else {
+        <div class="fila-torta">
+          <div class="grafico-torta" [style.background]="degradadoTorta()"></div>
+          <ul class="leyenda-torta">
+            @for (porcion of porcionesTorta(); track porcion.titulo) {
+              <li>
+                <span class="punto-leyenda" [style.background-color]="porcion.color"></span>
+                {{ porcion.titulo }} — {{ porcion.porcentaje }}% ({{ porcion.cantidad }})
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </section>
+  </div>
+</div>

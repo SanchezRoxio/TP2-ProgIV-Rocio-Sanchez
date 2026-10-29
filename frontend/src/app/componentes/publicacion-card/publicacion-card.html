@@ -12,7 +12,7 @@
   </header>
 
   <h3 class="titulo-publicacion">{{ publicacion.titulo }}</h3>
-  <p class="mensaje-publicacion">{{ publicacion.mensaje }}</p>
+  <p class="mensaje-publicacion">{{ grande ? publicacion.mensaje : (publicacion.mensaje | truncar:220) }}</p>
 
   @if (urlImagen(publicacion.imagen); as imagen) {
     <img [src]="imagen" alt="" class="imagen-publicacion" />
@@ -27,7 +27,7 @@
       <a class="btn-arcade btn-ver" [routerLink]="['/publicaciones', publicacion._id]">💬 VER / COMENTAR</a>
     }
 
-    @if (esMia) {
+    @if (esMia || esAdmin) {
       <button class="btn-arcade btn-eliminar" [disabled]="procesando" (click)="eliminar()">
         🗑️ BORRAR
       </button>

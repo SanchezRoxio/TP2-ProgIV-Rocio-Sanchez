@@ -3,11 +3,12 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../servicios/auth.service';
 import { ModalService } from '../../servicios/modal.service';
+import { EnfocarDirective } from '../../directivas/enfocar.directive';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, EnfocarDirective],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })

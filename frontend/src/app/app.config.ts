@@ -1,6 +1,7 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideServiceWorker } from '@angular/service-worker';
 import { routes } from './app.routes';
 import { credencialesInterceptor } from './interceptores/credenciales.interceptor';
 import { erroresInterceptor } from './interceptores/errores.interceptor';
@@ -10,5 +11,11 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(withInterceptors([credencialesInterceptor, erroresInterceptor])),
+    // el service worker solo se activa en el build de produccion (ng build),
+    // igual que en RoxiMovie: en ng serve molestaria mas de lo que ayuda
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ]
 };

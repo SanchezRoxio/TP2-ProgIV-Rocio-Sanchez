@@ -54,7 +54,7 @@ textarea.input-arcade {
 .selector-orden .btn-arcade.activo {
   opacity: 1;
   background-color: var(--color-primary);
-  color: #000;
+  color: var(--color-bg);
   border-color: var(--color-primary);
 }
 

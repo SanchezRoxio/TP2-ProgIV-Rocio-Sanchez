@@ -1,0 +1,115 @@
+.contenedor-dashboard {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.titulo-arcade {
+  color: var(--color-titulo);
+  font-size: 16px;
+  text-shadow: 3px 3px 0px var(--color-secondary);
+  margin: 0 0 20px 0;
+}
+
+.form-nuevo-usuario {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.campo label {
+  display: block;
+  font-size: 9px;
+  color: var(--color-texto-tenue);
+  margin-bottom: 6px;
+}
+
+.ayuda-campo {
+  font-size: 8px;
+  color: var(--color-texto-tenue);
+  margin: 4px 0 0 0;
+}
+
+textarea.input-arcade {
+  resize: vertical;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.opciones-perfil {
+  display: flex;
+  gap: 20px;
+}
+
+.opcion-radio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.cargando-texto {
+  text-align: center;
+  color: var(--color-texto-tenue);
+  margin-top: 30px;
+}
+
+.tabla-usuarios {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 10px;
+}
+
+.tabla-usuarios th {
+  text-align: left;
+  color: var(--color-texto-tenue);
+  font-size: 9px;
+  padding: 8px;
+  border-bottom: 3px solid var(--color-secondary);
+}
+
+.tabla-usuarios td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--color-secondary);
+  vertical-align: middle;
+}
+
+.tabla-usuarios tr.resaltado {
+  background-color: var(--color-input-bg);
+}
+
+.avatar-chico {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--color-primary);
+  object-fit: cover;
+}
+
+.avatar-iniciales {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  font-size: 10px;
+}
+
+.texto-tenue {
+  color: var(--color-texto-tenue);
+  font-size: 8px;
+}
+
+.estado-activo {
+  color: var(--color-exito);
+}
+
+.estado-inactivo {
+  color: var(--color-error);
+}
+
+.btn-chico {
+  font-size: 8px;
+  padding: 8px 10px;
+}

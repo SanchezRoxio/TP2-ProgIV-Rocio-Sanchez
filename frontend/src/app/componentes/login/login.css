@@ -12,11 +12,11 @@
 }
 
 .titulo-arcade {
-  color: var(--color-primary);
+  color: var(--color-titulo);
   font-size: 18px;
   text-align: center;
-  text-shadow: 3px 3px 0px var(--color-accent);
-  margin: 0 0 8px 0;
+  text-shadow: 3px 3px 0px var(--color-secondary);
+  margin: 0 0 30px 0;
 }
 
 .subtitulo {

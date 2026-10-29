@@ -31,6 +31,10 @@ export class Usuario {
 
   @Prop({ required: true, enum: ['usuario', 'administrador'], default: 'usuario' })
   perfil: string;
+
+  // baja logica: un usuario deshabilitado no puede ingresar a la aplicacion
+  @Prop({ default: true })
+  activo: boolean;
 }
 
 export const UsuarioSchema = SchemaFactory.createForClass(Usuario);
