@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../servicios/auth.service';
@@ -27,7 +27,7 @@ export class Registro {
   private modalService = inject(ModalService);
   private router = inject(Router);
 
-  cargando = false;
+  cargando = signal(false);
   archivoFotoPerfil: File | null = null;
   nombreArchivo = '';
 
@@ -61,7 +61,7 @@ export class Registro {
       return;
     }
 
-    this.cargando = true;
+    this.cargando.set(true);
     const valores = this.formulario.getRawValue();
 
     const formData = new FormData();
@@ -86,7 +86,7 @@ export class Registro {
       const mensaje = error?.error?.message ?? 'No se pudo completar el registro.';
       this.modalService.error(Array.isArray(mensaje) ? mensaje.join(' ') : mensaje);
     } finally {
-      this.cargando = false;
+      this.cargando.set(false);
     }
   }
 }

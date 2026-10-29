@@ -19,8 +19,8 @@
         }
       </div>
 
-      <button type="submit" class="btn-arcade" [disabled]="cargando">
-        {{ cargando ? 'CARGANDO...' : 'INGRESAR ▶' }}
+      <button type="submit" class="btn-arcade" [disabled]="cargando()">
+        {{ cargando() ? 'CARGANDO...' : 'INGRESAR ▶' }}
       </button>
     </form>
 

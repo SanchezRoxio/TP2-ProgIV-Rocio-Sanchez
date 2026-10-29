@@ -48,21 +48,23 @@ export class DashboardEstadisticas {
   anchoSvg = 300;
   altoSvg = 120;
 
-  puntosLinea = computed(() => {
+  coordenadasLinea = computed(() => {
     const datos = this.comentariosPorDia();
-    if (datos.length === 0) return '';
+    if (datos.length === 0) return [];
 
     const maximo = Math.max(1, ...datos.map(d => d.cantidad));
     const pasoX = datos.length > 1 ? this.anchoSvg / (datos.length - 1) : 0;
 
-    return datos
-      .map((d, i) => {
-        const x = datos.length > 1 ? i * pasoX : this.anchoSvg / 2;
-        const y = this.altoSvg - (d.cantidad / maximo) * this.altoSvg;
-        return `${x},${y}`;
-      })
-      .join(' ');
+    return datos.map((d, i) => ({
+      x: datos.length > 1 ? i * pasoX : this.anchoSvg / 2,
+      y: this.altoSvg - (d.cantidad / maximo) * this.altoSvg,
+    }));
   });
+
+  // un solo punto no alcanza para dibujar una linea (polyline necesita 2+),
+  // por eso ademas dibujamos un circulo en cada punto: con un solo dia de
+  // datos, al menos se ve ese punto
+  puntosLinea = computed(() => this.coordenadasLinea().map(p => `${p.x},${p.y}`).join(' '));
 
   // --- grafico de torta: comentarios por publicacion (CSS conic-gradient) ---
   porcionesTorta = computed<PorcionTorta[]>(() => {

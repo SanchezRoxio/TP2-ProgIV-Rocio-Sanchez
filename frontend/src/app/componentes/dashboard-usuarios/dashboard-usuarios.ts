@@ -25,7 +25,7 @@ export class DashboardUsuarios {
   usuarios = signal<Usuario[]>([]);
   cargando = signal(false);
   mostrarFormulario = signal(false);
-  enviando = false;
+  enviando = signal(false);
 
   formulario = this.fb.nonNullable.group({
     nombre: ['', [Validators.required]],
@@ -59,7 +59,7 @@ export class DashboardUsuarios {
       return;
     }
 
-    this.enviando = true;
+    this.enviando.set(true);
     try {
       const nuevo = await this.usuariosService.crear(this.formulario.getRawValue());
       this.usuarios.update(actuales => [nuevo, ...actuales]);
@@ -70,7 +70,7 @@ export class DashboardUsuarios {
       const mensaje = error?.error?.message ?? 'No se pudo crear el usuario.';
       this.modalService.error(Array.isArray(mensaje) ? mensaje.join(' ') : mensaje);
     } finally {
-      this.enviando = false;
+      this.enviando.set(false);
     }
   }
 

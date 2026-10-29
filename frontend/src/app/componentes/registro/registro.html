@@ -78,8 +78,8 @@
         </label>
       </div>
 
-      <button type="submit" class="btn-arcade" [disabled]="cargando">
-        {{ cargando ? 'CREANDO...' : 'CREAR CUENTA ▶' }}
+      <button type="submit" class="btn-arcade" [disabled]="cargando()">
+        {{ cargando() ? 'CREANDO...' : 'CREAR CUENTA ▶' }}
       </button>
     </form>
 

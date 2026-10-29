@@ -87,6 +87,9 @@ export class AuthService {
     if (!usuario) {
       throw new UnauthorizedException('El usuario ya no existe.');
     }
+    if (!usuario.activo) {
+      throw new UnauthorizedException('Tu cuenta fue deshabilitada.');
+    }
 
     return this.sinPassword(usuario);
   }

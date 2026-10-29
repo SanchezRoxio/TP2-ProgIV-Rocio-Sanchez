@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../servicios/auth.service';
@@ -18,7 +18,7 @@ export class Login {
   private modalService = inject(ModalService);
   private router = inject(Router);
 
-  cargando = false;
+  cargando = signal(false);
 
   formulario = this.fb.nonNullable.group({
     identificador: ['', [Validators.required]],
@@ -32,7 +32,7 @@ export class Login {
       return;
     }
 
-    this.cargando = true;
+    this.cargando.set(true);
     const { identificador, password } = this.formulario.getRawValue();
 
     try {
@@ -42,7 +42,7 @@ export class Login {
       const mensaje = error?.error?.message ?? 'No se pudo iniciar sesión.';
       this.modalService.error(mensaje);
     } finally {
-      this.cargando = false;
+      this.cargando.set(false);
     }
   }
 }

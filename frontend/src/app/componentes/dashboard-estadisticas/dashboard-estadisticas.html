@@ -42,6 +42,9 @@
       } @else {
         <svg class="grafico-lineas" [attr.viewBox]="'0 0 ' + anchoSvg + ' ' + altoSvg" preserveAspectRatio="none">
           <polyline [attr.points]="puntosLinea()" fill="none" stroke="var(--color-primary)" stroke-width="2" />
+          @for (punto of coordenadasLinea(); track $index) {
+            <circle [attr.cx]="punto.x" [attr.cy]="punto.y" r="4" fill="var(--color-primary)" />
+          }
         </svg>
         <p class="pie-grafico-lineas">
           <span>{{ comentariosPorDia()[0].fecha }}</span>
